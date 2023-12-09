@@ -2,7 +2,7 @@
 
 ## Caesar Text Encoding
 
-From [wiki](https://en.wikipedia.org/wiki/Caesar_cipher):
+Description from [Wiki](https://en.wikipedia.org/wiki/Caesar_cipher):
 
 ```
 In cryptography, a Caesar cipher, also known as Caesar's cipher, the shift cipher, Caesar's code, 
