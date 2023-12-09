@@ -12,7 +12,12 @@ end
     ARGV[0] == 'encode' || ARGV[0] == 'decode'
   end
 
+  def help_required?
+    ARGV[0] == 'help' || ARGV[0] == 'usage'
+  end
+
   def display_usage
+    usage if help_required?
     usage if ARGV.size < 1 
     usage unless correct_params?
   end 
