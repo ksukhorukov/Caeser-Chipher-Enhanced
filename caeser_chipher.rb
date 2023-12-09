@@ -1,3 +1,5 @@
+require 'base64'
+
 module App
   class CaeserChipher
     attr_reader :input, :output, :shift_n, 
@@ -20,13 +22,21 @@ module App
 
     private 
 
+    def base64_encoded_result 
+      @base64_encoded_result ||= Base64.encode64(result)
+    end
+
+    def base64_decoded_result 
+      @base64_decoded_result ||= Base64.decode64(result)
+    end
+
     def substitution_idx(chr)
       # puts " substitution_idx. encode: #{encode}, decode: #{decode}"
       current_idx = dictionary.index(chr)
 
       if current_idx.nil?
-        puts "\ncannot find '#{chr}' inside dictionary\n\n"
-        raise 'Error: Cannot chipher. wrong alphabet. Supported languages: EN, RU'
+        @dictionary << chr
+        return substitution_idx(chr)
       end
 
       return (current_idx + shift_n) % dictionary.size if encode == true
@@ -70,8 +80,8 @@ module App
       begin 
         transform_spaces if !encode
 
-        fp_output.puts(@result)
-        puts "\n#{result}\n".colorize(:green)
+        fp_output.puts(base64_encoded_result)
+        puts "\n#{base64_encoded_result}\n".colorize(:green)
       ensure 
         fp_output.close 
       end
