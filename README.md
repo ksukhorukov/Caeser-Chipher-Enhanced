@@ -1,6 +1,6 @@
 # CCODE
 
-## Caesar Text Encoding
+## Caesar Text Chipher
 
 Description from [Wiki](https://en.wikipedia.org/wiki/Caesar_cipher)
 
