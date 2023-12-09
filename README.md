@@ -32,10 +32,6 @@ $ ./app.rb encode ./input.txt ./output.txt 10
 
 rs+8DrsC8CDBsxq8Gsvv8lo8mrszroBon
 
-$ ./app.rb encode ./input.txt ./output.txt 10
-
-rs+8DrsC8CDBsxq8Gsvv8lo8mrszroBon
-
 $ echo 'rs+8DrsC8CDBsxq8Gsvv8lo8mrszroBon' > ./input.txt 
 $ ./app.rb decode ./input.txt ./output.txt 10           
 
