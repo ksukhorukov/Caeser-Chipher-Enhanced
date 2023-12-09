@@ -5,6 +5,7 @@ OUTPUT_FILE_PATH = './OUTPUT.TXT'
 DEFAULT_SHIFT_N = 27
 
 require 'pp'
+require 'colorize'
 
 class CaesarChipher
   attr_reader :input, :output, :shift_n
@@ -13,6 +14,8 @@ class CaesarChipher
     @input = input
     @output = output
     @shift_n = shift_n
+
+    puts "\ninput: #{input}, output: #{output}, shift_n #{shift_n}\n\n".colorize(:green)
   end 
 
   private 
