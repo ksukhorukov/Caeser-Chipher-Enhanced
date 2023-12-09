@@ -78,7 +78,9 @@ module App
     end
 
     def transform_spaces 
-      @result = result.split('/').join(' ')
+      @result.gsub!('.', ' ')
+      @result.gsub!('/', ' ')
+      @result
     end
 
     def dictionary
