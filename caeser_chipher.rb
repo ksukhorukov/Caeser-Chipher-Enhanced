@@ -71,7 +71,7 @@ module App
         transform_spaces if !encode
 
         fp_output.puts(@result)
-        puts result.colorize(:green)
+        puts "\n#{result}\n".colorize(:green)
       ensure 
         fp_output.close 
       end
