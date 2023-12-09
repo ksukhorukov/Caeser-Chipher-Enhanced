@@ -1,4 +1,4 @@
-# ccode
+# CCODE
 
 ## Caesar Text Encoding
 
