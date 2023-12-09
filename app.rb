@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
-INPUT_FILE_PATH = './INPUT.TXT'
-OUTPUT_FILE_PATH = './OUTPUT.TXT'
-DEFAULT_SHIFT_N = 27
+INPUT_FILE_PATH = './input.txt'
+OUTPUT_FILE_PATH = './output.txt'
+DEFAULT_SHIFT_N = 1
 
 require 'pp'
 require 'pry'
@@ -23,11 +23,12 @@ class CaesarChipher
     @result = ''
 
     perform
+    output_result
   end 
 
   private 
 
-  def substitution_idx(chr)
+  def substitution_idx(chr, encode: true, decode: false)
     current_idx = dictionary.index(chr)
 
     if current_idx.nil?
@@ -35,29 +36,42 @@ class CaesarChipher
       raise 'Error: Cannot chipher. wrong alphabet. Supported languages: EN, RU'
     end
 
-    (current_idx + shift_n + 1) % dictionary.size
+    return (current_idx + shift_n + 1) % dictionary.size if encode == true
+    return ((current_idx - shift_n) % (dictionary.size - 1)).abs if decode == true
   end
 
   def perform
     check_params 
-    chipher if encode  
-    decode if decode  
 
-    output_result
+    if encode == true
+      encode  
+    elsif decode == true 
+      decode
+    end 
   end 
 
   def chipher
     read_input.each do |line| 
       line.chomp.split('').map do |chr| 
-        fp_output.write(dictionary[substitution_idx(chr)]) 
-        @result += dictionary[substitution_idx(chr)]
+        puts "original: #{chr}"
+        extracted_chr = dictionary[substitution_idx(chr, encode: true, decode: false)]
+        puts "mutated: #{extracted_chr}"
+        @result += extracted_chr
       end
     end 
 
-    fp_output.write("\n")
+    @result
   end
 
   def decode 
+    read_input.each do |line| 
+      line.chomp.split('').map do |chr| 
+        extracted_chr = dictionary[substitution_idx(chr, encode: false, decode: true)]
+        @result += extracted_chr
+      end
+    end 
+
+    @result
   end 
 
   def check_params
@@ -77,7 +91,7 @@ class CaesarChipher
 
   def output_result
     begin 
-      fp_output.write(@result)
+      fp_output.puts(@result)
       puts "#{result}".colorize(:green)
     ensure 
       fp_output.close 
@@ -109,4 +123,13 @@ end
 @output_file_pathh = ARGV[1] || OUTPUT_FILE_PATH
 @shift_n = ARGV[2]&.to_i || DEFAULT_SHIFT_N 
 
-CaesarChipher.new(input: @input_file_path, output: @output_file_pathh, shift_n: @shift_n)
+# CaesarChipher.new(input: @input_file_path, output: @output_file_pathh, shift_n: @shift_n, decode: true, encode: false)
+
+CaesarChipher.new(
+    input: @input_file_path, 
+    output: @output_file_pathh, 
+    shift_n: @shift_n, 
+    decode: false, 
+    encode: true
+  )
+
