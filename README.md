@@ -2,7 +2,7 @@
 
 ## Caesar Text Encoding
 
-Description from [Wiki](https://en.wikipedia.org/wiki/Caesar_cipher):
+Description from [Wiki](https://en.wikipedia.org/wiki/Caesar_cipher)
 
 ```
 In cryptography, a Caesar cipher, also known as Caesar's cipher, the shift cipher, Caesar's code, 
@@ -12,4 +12,13 @@ number of positions down the alphabet. For example, with a left shift of 3, D wo
 by A, E would become B, and so on. The method is named after Julius Caesar, who used it in his 
 private correspondence.
 ```
+
+## Usage
+
+...
+
+## Example
+
+...
+
 
