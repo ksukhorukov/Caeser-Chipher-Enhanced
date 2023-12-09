@@ -84,7 +84,9 @@ module App
     end
 
     def dictionary
-      @dictionary ||= (numbers + letters +  letters_capitalized + symbols + ['’', ' ', '\n']).flatten
+      @dictionary ||= (numbers + letters +  letters_capitalized + 
+                       russian_letters +  russian_letters_capitalized + 
+                       symbols + ['’', ' ', '\n']).flatten
     end
 
     def numbers
@@ -97,6 +99,14 @@ module App
 
     def letters_capitalized
       @letters_capitalized ||= ('A'..'Z').to_a
+    end
+
+    def russian_letters
+      @russian_letters ||= ('а'..'я').to_a
+    end
+
+    def russian_letters_capitalized
+      @russian_letters_capitalized ||= ('А'..'Я').to_a
     end
 
     def symbols

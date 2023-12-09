@@ -15,10 +15,26 @@ named after Julius Caesar, who used it in his private correspondence.
 
 ## Usage
 
-...
+```
+ $ ./app.rb help
+
+./app.rb encode|decpde ./input.txt ./output.txt 5
+
+The last param is shifting number, e.g. 25
+```
+
 
 ## Example
 
-...
+```
+$ echo 'hi! this string will be chiphered' > input.txt 
+$ ./app.rb encode ./input.txt ./output.txt 10
+rs+8DrsC8CDBsxq8Gsvv8lo8mrszroBon
+$ echo 'rs+8DrsC8CDBsxq8Gsvv8lo8mrszroBon' > ./input.txt
+$ ./app.rb decode ./input.txt ./output.txt 10     
+hi! this string will be chiphered
+```
+
+
 
 
