@@ -8,17 +8,63 @@ require 'pp'
 require 'colorize'
 
 class CaesarChipher
-  attr_reader :input, :output, :shift_n
+  attr_reader :input, :output, :shift_n, 
+              :input_text, :encode, :decode
 
-  def initialize(input:, output:, shift_n:)
+  attr_accessor :result
+              
+  def initialize(input:, output:, shift_n:, encode: true, decode: false)
     @input = input
     @output = output
     @shift_n = shift_n
+    @encode = encode 
+    @decode = decode
+    @result = ""
 
     puts "\ninput: #{input}, output: #{output}, shift_n #{shift_n}\n\n".colorize(:green)
+
+    perform
   end 
 
   private 
+
+  def perform
+    check_params 
+    chipher if encode  
+    decode if decode  
+
+    output_result
+  end 
+
+  def chipher
+  end
+
+  def decode 
+  end 
+
+  def check_params
+    raise 'shifting argument must be positive' if shift_n < 0 
+    raise 'you have to decode or encode, not encode and decode in parallel' if encode and decode == true 
+
+    read_input
+  end
+
+  def read_input
+    @input_context ||= File.readlines(input)
+  end 
+
+  def fp_output
+    @fp_output ||= File.open(output, 'w')
+  end 
+
+  def output_result
+    begin 
+      fp_output.write(result)
+      puts "\n#{result}".colorize(:green)
+    ensure 
+      fp_output.close 
+    end
+  end
 
   def dictionary
     @dictionary ||= numbers + letters + russian_letters + symbols
