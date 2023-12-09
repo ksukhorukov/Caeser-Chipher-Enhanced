@@ -6,7 +6,7 @@ require_relative 'caeser_chipher'
 include CommandLineParams
 include App
 
-display_usage
+::CommandLineParams::display_usage
 
 ::App::CaeserChipher.new(
     input: @input_file_path, 
