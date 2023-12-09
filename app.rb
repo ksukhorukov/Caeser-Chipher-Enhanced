@@ -5,6 +5,7 @@ OUTPUT_FILE_PATH = './OUTPUT.TXT'
 DEFAULT_SHIFT_N = 27
 
 require 'pp'
+require 'pry'
 require 'colorize'
 
 class CaesarChipher
@@ -19,14 +20,23 @@ class CaesarChipher
     @shift_n = shift_n
     @encode = encode 
     @decode = decode
-    @result = ""
-
-    puts "\ninput: #{input}, output: #{output}, shift_n #{shift_n}\n\n".colorize(:green)
+    @result = ''
 
     perform
   end 
 
   private 
+
+  def substitution_idx(chr)
+    current_idx = dictionary.index(chr)
+
+    if current_idx.nil?
+      puts "\ncannot find '#{chr}' inside dictionary\n\n"
+      raise 'Error: Cannot chipher. wrong alphabet. Supported languages: EN, RU'
+    end
+
+    (current_idx + shift_n + 1) % dictionary.size
+  end
 
   def perform
     check_params 
@@ -37,6 +47,14 @@ class CaesarChipher
   end 
 
   def chipher
+    read_input.each do |line| 
+      line.chomp.split('').map do |chr| 
+        fp_output.write(dictionary[substitution_idx(chr)]) 
+        @result += dictionary[substitution_idx(chr)]
+      end
+    end 
+
+    fp_output.write("\n")
   end
 
   def decode 
@@ -50,7 +68,7 @@ class CaesarChipher
   end
 
   def read_input
-    @input_context ||= File.readlines(input)
+    @input_context ||= File.readlines(input) 
   end 
 
   def fp_output
@@ -59,15 +77,15 @@ class CaesarChipher
 
   def output_result
     begin 
-      fp_output.write(result)
-      puts "\n#{result}".colorize(:green)
+      fp_output.write(@result)
+      puts "#{result}".colorize(:green)
     ensure 
       fp_output.close 
     end
   end
 
   def dictionary
-    @dictionary ||= numbers + letters + russian_letters + symbols
+    @dictionary ||= (numbers + letters +  letters_capitalized + symbols).to_a
   end
 
   def numbers
@@ -75,11 +93,11 @@ class CaesarChipher
   end
 
   def letters
-    @letters ||= ('A'..'z').to_a
+    @letters ||= ('a'..'z').to_a
   end
 
-  def russian_letters
-    @letters ||= ('А'..'я').to_a
+  def letters_capitalized
+    @letters ||= ('A'..'Z').to_a
   end
 
   def symbols
