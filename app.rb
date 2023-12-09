@@ -10,7 +10,7 @@ require 'colorize'
 
 class CaesarChipher
   attr_reader :input, :output, :shift_n, 
-              :input_text, :encode, :decode
+              :input_text, :encode
 
   attr_accessor :result
               
@@ -19,7 +19,6 @@ class CaesarChipher
     @output = output
     @shift_n = shift_n
     @encode = encode 
-    @decode = decode
     @result = ''
 
     # puts "encode: #{encode}, decode: #{decode}"
@@ -40,7 +39,8 @@ class CaesarChipher
     end
 
     return (current_idx + shift_n) % dictionary.size if encode == true
-    return ((current_idx - shift_n) % dictionary.size).abs if decode == true
+    
+    return ((current_idx - shift_n) % dictionary.size).abs
   end
 
   def perform
@@ -63,7 +63,6 @@ class CaesarChipher
 
   def check_params
     raise 'shifting argument must be positive' if shift_n < 0 
-    raise 'you have to decode or encode, not encode and decode in parallel' if encode and decode == true 
 
     read_input
   end
@@ -78,7 +77,7 @@ class CaesarChipher
 
   def output_result
     begin 
-      transform_spaces if decode 
+      transform_spaces if !encode
 
       fp_output.puts(@result)
       puts result.colorize(:green)
@@ -92,7 +91,7 @@ class CaesarChipher
   end
 
   def dictionary
-    @dictionary ||= (numbers + letters +  letters_capitalized + symbols + ["\ "]).flatten
+    @dictionary ||= (numbers + letters +  letters_capitalized + symbols + [' ', '\n']).flatten
   end
 
   def numbers
@@ -113,15 +112,15 @@ class CaesarChipher
 end
 
 
-@input_file_path = ARGV[0] || INPUT_FILE_PATH 
-@output_file_pathh = ARGV[1] || OUTPUT_FILE_PATH
-@shift_n = ARGV[2]&.to_i || DEFAULT_SHIFT_N 
+@encode = ARGV[0] == 'encode' ? true : false
+@input_file_path = ARGV[1] || INPUT_FILE_PATH 
+@output_file_pathh = ARGV[2] || OUTPUT_FILE_PATH
+@shift_n = ARGV[3]&.to_i || DEFAULT_SHIFT_N 
 
 CaesarChipher.new(
     input: @input_file_path, 
     output: @output_file_pathh, 
     shift_n: @shift_n, 
-    decode: true, 
-    encode: false
+    encode: @encode
   )
 
