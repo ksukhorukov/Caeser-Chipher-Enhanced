@@ -22,13 +22,16 @@ class CaesarChipher
     @decode = decode
     @result = ''
 
+    # puts "encode: #{encode}, decode: #{decode}"
+
     perform
     output_result
   end 
 
   private 
 
-  def substitution_idx(chr, encode: true, decode: false)
+  def substitution_idx(chr)
+    # puts " substitution_idx. encode: #{encode}, decode: #{decode}"
     current_idx = dictionary.index(chr)
 
     if current_idx.nil?
@@ -36,26 +39,20 @@ class CaesarChipher
       raise 'Error: Cannot chipher. wrong alphabet. Supported languages: EN, RU'
     end
 
-    return (current_idx + shift_n + 1) % dictionary.size if encode == true
-    return ((current_idx - shift_n) % (dictionary.size - 1)).abs if decode == true
+    return (current_idx + shift_n) % dictionary.size if encode == true
+    return ((current_idx - shift_n) % dictionary.size).abs if decode == true
   end
 
   def perform
     check_params 
-
-    if encode == true
-      encode  
-    elsif decode == true 
-      decode
-    end 
+    transform 
   end 
 
-  def chipher
+  def transform
     read_input.each do |line| 
       line.chomp.split('').map do |chr| 
-        puts "original: #{chr}"
-        extracted_chr = dictionary[substitution_idx(chr, encode: true, decode: false)]
-        puts "mutated: #{extracted_chr}"
+        extracted_chr = dictionary[substitution_idx(chr)].to_s
+        # puts "chr: '#{chr}', extracted_chr: '#{extracted_chr}'\n"
         @result += extracted_chr
       end
     end 
@@ -63,16 +60,6 @@ class CaesarChipher
     @result
   end
 
-  def decode 
-    read_input.each do |line| 
-      line.chomp.split('').map do |chr| 
-        extracted_chr = dictionary[substitution_idx(chr, encode: false, decode: true)]
-        @result += extracted_chr
-      end
-    end 
-
-    @result
-  end 
 
   def check_params
     raise 'shifting argument must be positive' if shift_n < 0 
@@ -91,15 +78,21 @@ class CaesarChipher
 
   def output_result
     begin 
+      transform_spaces if decode 
+
       fp_output.puts(@result)
-      puts "#{result}".colorize(:green)
+      puts result.colorize(:green)
     ensure 
       fp_output.close 
     end
   end
 
+  def transform_spaces 
+    @result = result.split('/').join(' ')
+  end
+
   def dictionary
-    @dictionary ||= (numbers + letters +  letters_capitalized + symbols).to_a
+    @dictionary ||= (numbers + letters +  letters_capitalized + symbols + ["\ "]).flatten
   end
 
   def numbers
@@ -119,17 +112,16 @@ class CaesarChipher
   end
 end
 
+
 @input_file_path = ARGV[0] || INPUT_FILE_PATH 
 @output_file_pathh = ARGV[1] || OUTPUT_FILE_PATH
 @shift_n = ARGV[2]&.to_i || DEFAULT_SHIFT_N 
-
-# CaesarChipher.new(input: @input_file_path, output: @output_file_pathh, shift_n: @shift_n, decode: true, encode: false)
 
 CaesarChipher.new(
     input: @input_file_path, 
     output: @output_file_pathh, 
     shift_n: @shift_n, 
-    decode: false, 
-    encode: true
+    decode: true, 
+    encode: false
   )
 
