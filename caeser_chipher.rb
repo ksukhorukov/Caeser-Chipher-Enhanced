@@ -81,7 +81,7 @@ module App
         transform_spaces if !encode
 
         fp_output.puts(base64_encoded_result)
-        puts "\n#{base64_encoded_result}\n".colorize(:green)
+        puts "\n#{base64_encoded_result}".colorize(:green)
       ensure 
         fp_output.close 
       end
