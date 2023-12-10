@@ -3,7 +3,7 @@ require 'pry'
 
 class CaeserChipher
   attr_reader :input, :output, :shift_n, 
-              :input_text, :encode
+              :input_text, :encode, :substituted_data
 
   attr_accessor :result
               
@@ -36,7 +36,7 @@ class CaeserChipher
     # puts " substitution_idx. encode: #{encode}, decode: #{decode}"
     current_idx = dictionary.index(chr)
 
-    if current_idx.nil?
+    if current_idx.nil? and !chr.nil?
       @dictionary << chr
       return substitution_idx(chr)
     end
@@ -77,14 +77,33 @@ class CaeserChipher
       line = line.force_encoding('utf-8')
       line.chomp!
       
-      chars = line.split('')
-
-      @result += chars.map { |chr| dictionary[substitution_idx(chr)].to_s }.reduce(:+)
+      @chars = line.split('')
+      reject_nils_in_chars
+      binding.pry
+      perform_substitution
+      @result += substituted_data.reject { |chr| chr == nil }.reduce(:+) unless substituted_data.nil?
     end 
     
     @result += "\n"
   end
 
+  def perform
+    reject_nils_in_chars
+    perform_substitution
+    substituted_data
+  end
+
+  def reject_nils_in_chars
+    return '' if substituted_data.nil?
+
+    @substituted_data = substituted_data.reject { |chr| chr == nil }
+  end
+
+  def perform_substitution
+    return '' if @chars.nil?
+    
+    @substituted_data = @chars.map { |chr| ((dictionary[substitution_idx(chr)].to_s unless chr.nil? or chr.empty?) or '' ) }
+  end
 
   def check_params
     raise 'shifting argument must be positive' if shift_n < 0 
