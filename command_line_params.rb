@@ -8,7 +8,7 @@ module CommandLineParams
   end
 
   def usage
-    puts "\n#{$0} encode|decpde ./input.txt ./output.txt 5\n\nThe last param is shifting number, e.g. 33 or 5\n".colorize(:green)
+    puts "\n#{$0} encode|decode ./input.txt ./output.txt 5\n\nThe last param is shifting number, e.g. 33 or 5\n".colorize(:green)
     exit
   end 
 

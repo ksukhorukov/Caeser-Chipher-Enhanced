@@ -18,7 +18,7 @@ named after Julius Caesar, who used it in his private correspondence.
 ```
 $ ./app.rb
 
-./app.rb encode|decpde ./input.txt ./output.txt 5
+./app.rb encode|decode ./input.txt ./output.txt 5
 
 The last param is shifting number, e.g. 33 or 5
 ```
