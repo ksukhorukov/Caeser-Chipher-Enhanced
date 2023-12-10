@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 
+# CLEAN
 rm ./input*
 rm ./output*
 
-# BASE CASE
+# INIT DATA
 echo 'crypt0' > ./input.txt 
+
+# BASE CASE
 ./app.rb encode ./input.txt ./output.txt 1
 ./app.rb decode ./output.txt ./input.txt 1
 
@@ -12,3 +15,7 @@ echo 'crypt0' > ./input.txt
 echo 'crypt0' > ./input.txt 
 ./app.rb encode ./input.txt ./output.txt 33
 ./app.rb decode ./output.txt ./input.txt 33
+
+# CLEAN
+rm ./input*
+rm ./output*
