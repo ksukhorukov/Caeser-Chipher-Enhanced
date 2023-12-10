@@ -44,26 +44,24 @@ hi! this string will be chiphered
 ## Tests
 
 ```
- $ ./run_tests.sh 
+% time ./run_tests.sh > /dev/null                           
 
+real  0m0.106s
+user  0m0.077s
+sys 0m0.023s
 
-dszqu1
+real  0m0.078s
+user  0m0.059s
+sys 0m0.015s
 
+real  0m0.077s
+user  0m0.059s
+sys 0m0.015s
 
-
-crypt0
-
-
-
-JYеWаe
-
-
-
-crypt0
-
-
-[+] ALL TESTS PASSED
-
+real  0m0.078s
+user  0m0.059s
+sys 0m0.015s
+./run_tests.sh > /dev/null  0.26s user 0.08s system 94% cpu 0.363 total
 ```
 
 
