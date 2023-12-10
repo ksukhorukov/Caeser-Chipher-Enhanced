@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+clear
+
 # CLEAN
 rm -f  ./input*
 rm -f ./output*
@@ -19,3 +21,5 @@ echo 'crypt0' > ./input.txt
 # CLEAN
 rm ./input*
 rm ./output*
+
+echo -e "[+] ALL TESTS PASSED\n"

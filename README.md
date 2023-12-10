@@ -39,6 +39,29 @@ hi! this string will be chiphered
 
 ```
 
+## Tests
 
+```
+ $ ./run_tests.sh 
+
+
+dszqu1
+
+
+
+crypt0
+
+
+
+JYеWаe
+
+
+
+crypt0
+
+
+[+] ALL TESTS PASSED
+
+```
 
 
