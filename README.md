@@ -4,6 +4,7 @@
 
 Description from [Wiki](https://en.wikipedia.org/wiki/Caesar_cipher)
 
+***
 ```
 In cryptography, a Caesar cipher, also known as Caesar's cipher, the shift cipher, 
 Caesar's code,  or Caesar shift, is one of the simplest and most widely known encryption
@@ -12,6 +13,7 @@ replaced by a letter some fixed  number of positions down the alphabet. For exam
 a left shift of 3, D would be replaced  by A, E would become B, and so on. The method is 
 named after Julius Caesar, who used it in his private correspondence.
 ```
+***
 
 ## Usage
 
