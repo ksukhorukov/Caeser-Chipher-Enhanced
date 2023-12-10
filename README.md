@@ -29,15 +29,15 @@ The last param is shifting number, e.g. 33 or 5
 ## Example
 
 ```
-$ echo 'hi! this string will be chiphered' > input.txt  
-$ ./app.rb encode ./input.txt ./output.txt 10           
+ % echo 'hi! this string will be chiphered' > input.txt  
+$ ./app.rb encode ./input.txt ./output.txt 10          
 
-rs+8DrsC8CDBsxq8Gsvv8lo8mrszroBon
+cnMrOERyc0M4Q0RCc3hxOEdzdnY4bG84bXJzenJvQm9u
 
-$ echo 'rs+8DrsC8CDBsxq8Gsvv8lo8mrszroBon' > ./input.txt 
-$ ./app.rb decode ./input.txt ./output.txt 10           
+user@air ccode %  ./app.rb decode ./output.txt ./output2.txt 10 
 
 hi! this string will be chiphered
+
 
 ```
 
