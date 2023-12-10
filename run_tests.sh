@@ -18,6 +18,13 @@ echo 'crypt0' > ./input.txt
 ./app.rb encode ./input.txt ./output.txt 33
 ./app.rb decode ./output.txt ./input.txt 33
 
+# PERFORMANCE
+
+# CUSTOM SHIFTING EQUALS 33
+./app.rb encode ./war_and_peace.txt ./output.txt 33
+./app.rb decode ./output.txt ./input.txt 33
+
+
 # CLEAN
 rm ./input*
 rm ./output*
