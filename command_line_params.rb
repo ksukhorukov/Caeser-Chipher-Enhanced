@@ -52,12 +52,13 @@ module CommandLineParams
   end 
 
   def self.params 
-      {
-        input: input_file_path, 
-        output: output_file_pathh, 
-        shift_n: shift_n, 
-        encode: encode
-      }
+    {
+      input: input_file_path, 
+      output: output_file_pathh, 
+      shift_n: shift_n, 
+      encode: encode
+    }
+  end 
 end
 
 

@@ -6,11 +6,11 @@ class CaeserChipher
 
   attr_accessor :result
               
-  def initialize(input:, output:, shift_n:, encode: true, decode: false)
-    @input = input
-    @output = output
-    @shift_n = shift_n
-    @encode = encode 
+  def initialize(params)
+    @input = params[:input]
+    @output = params[:output]
+    @shift_n = params[:shift_n]
+    @encode = params[:encode]
     @result = ''
 
     # puts "encode: #{encode}, decode: #{decode}"
