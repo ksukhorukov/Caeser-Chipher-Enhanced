@@ -20,7 +20,7 @@ $ ./app.rb
 
 ./app.rb encode|decpde ./input.txt ./output.txt 5
 
-The last param is shifting number, e.g. 33
+The last param is shifting number, e.g. 33 or 5
 ```
 
 

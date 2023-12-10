@@ -3,15 +3,15 @@
 require_relative 'helper'
 require_relative 'caeser_chipher'
 
-include CommandLineParams
-include App
+module App
+  include CommandLineParams
 
-::CommandLineParams::display_usage
+  def self.perform
+    binding.pry
+    CommandLineParams.display_usage
+    binding.pry
+    CaeserChipher.new(CommandLineParams.params)
+  end
+end
 
-::App::CaeserChipher.new(
-    input: @input_file_path, 
-    output: @output_file_pathh, 
-    shift_n: @shift_n, 
-    encode: @encode
-  )
-
+App::perform
