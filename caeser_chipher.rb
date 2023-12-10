@@ -1,4 +1,5 @@
 require 'base64'
+require 'pry'
 
 class CaeserChipher
   attr_reader :input, :output, :shift_n, 
@@ -13,6 +14,7 @@ class CaeserChipher
     @encode = params[:encode]
     @result = ''
 
+    # #binding.pry
     # puts "encode: #{encode}, decode: #{decode}"
 
     perform
@@ -56,19 +58,18 @@ class CaeserChipher
       read_input.map { |line| buffer << line }
       @result = buffer.reduce(:+)
       @result = base64_decoded_result
-      fp_output.write(@result)
+      fp_output.write("#{@result}\n")
+      fp_output.close
+      @fp_output = nil
+      #binding.pry
       return @result
     end 
-    #binding.pry
     read_input.each do |line| 
       chars = line.chomp.split('')
-      #binding.pry
       @result += chars.map { |chr| dictionary[substitution_idx(chr)].to_s }.reduce(:+)
-      #binding.pry
     end 
-      # .inject(@result) { |chr| print dictionary[substitution_idx(chr)].to_s } }
-    #binding.pry
-    @result
+    @result += "\n"
+    @result = base64_encoded_result
   end
 
 
