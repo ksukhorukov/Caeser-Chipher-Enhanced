@@ -23,11 +23,11 @@ module App
     private 
 
     def base64_encoded_result 
-      @base64_encoded_result ||= Base64.encode64(result)
+      @base64_encoded_result ||= Base64.encode64(@result)
     end
 
     def base64_decoded_result 
-      @base64_decoded_result ||= Base64.decode64(result)
+      @base64_decoded_result ||= Base64.decode64(@result)
     end
 
     def substitution_idx(chr)
@@ -54,18 +54,19 @@ module App
         buffer = []
         read_input.map { |line| buffer << line }
         @result = buffer.reduce(:+)
-        result = base64_decoded_result
-        fp_output.puts(@result)
+        @result = base64_decoded_result
+        fp_output.write(@result)
       end
+
+      return @result unless encode
 
       read_input.each do |line| 
         line.chomp.split('').map do |chr| 
           extracted_chr = dictionary[substitution_idx(chr)].to_s
-          # puts "chr: '#{chr}', extracted_chr: '#{extracted_chr}'\n"
           @result += extracted_chr
         end
       end 
-      
+
       @result
     end
 
@@ -86,10 +87,10 @@ module App
 
     def output_result
       begin 
-        transform_spaces if !encode
-
-        fp_output.puts(base64_encoded_result)
-        puts "\n#{base64_encoded_result}".colorize(:green)
+        base64_encoded_result if encode
+        transform_spaces unless encode
+        fp_output.write(@result)
+        puts "\n#{@result}\n".colorize(:green)
       ensure 
         fp_output.close 
       end
