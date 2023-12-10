@@ -4,7 +4,7 @@ DEFAULT_SHIFT_N = 1
 
 module CommandLineParams
   def usage
-  puts "\n#{$0} encode|decpde ./input.txt ./output.txt 5\n\nThe last param is shifting number, e.g. 25\n".colorize(:green)
+  puts "\n#{$0} encode|decpde ./input.txt ./output.txt 5\n\nThe last param is shifting number, e.g. 33 or 5\n".colorize(:green)
   exit
 end 
 
