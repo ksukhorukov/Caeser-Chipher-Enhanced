@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # CLEAN
-rm ./input*
-rm ./output*
+rm -f  ./input*
+rm -f ./output*
 
 # INIT DATA
 echo 'crypt0' > ./input.txt 
