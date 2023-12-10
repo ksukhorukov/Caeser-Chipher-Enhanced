@@ -50,6 +50,14 @@ module App
     end 
 
     def transform
+      unless encode
+        buffer = []
+        read_input.map { |line| buffer << line }
+        @result = buffer.reduce(:+)
+        result = base64_decoded_result
+        fp_output.puts(@result)
+      end
+
       read_input.each do |line| 
         line.chomp.split('').map do |chr| 
           extracted_chr = dictionary[substitution_idx(chr)].to_s
@@ -57,7 +65,7 @@ module App
           @result += extracted_chr
         end
       end 
-
+      
       @result
     end
 
