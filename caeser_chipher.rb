@@ -28,6 +28,7 @@ class CaeserChipher
   end
 
   def base64_decoded_result 
+    binding.pry
     @base64_decoded_result ||= Base64.decode64(@result)
   end
 
@@ -59,10 +60,9 @@ class CaeserChipher
       read_input.map { |line| buffer << line }
       
       @result = buffer.reduce(:+)
-      @result = base64_decoded_result
 
       begin 
-        fp_input_for_write.write("#{@result}")
+        fp_input_for_write.puts("#{@result}")
       ensure 
         fp_input_for_write.close
         @fp_input_for_write = nil
@@ -74,8 +74,11 @@ class CaeserChipher
     
     @result = ''
     read_input.each do |line| 
+      line = line.force_encoding('utf-8')
+      line.chomp!
       
-      chars = line.chomp.split('')
+      chars = line.split('')
+
       @result += chars.map { |chr| dictionary[substitution_idx(chr)].to_s }.reduce(:+)
     end 
     
