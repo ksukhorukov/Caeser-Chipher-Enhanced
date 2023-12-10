@@ -59,15 +59,15 @@ class CaeserChipher
       fp_output.write(@result)
       return @result
     end 
-    binding.pry
+    #binding.pry
     read_input.each do |line| 
       chars = line.chomp.split('')
-      binding.pry
+      #binding.pry
       @result += chars.map { |chr| dictionary[substitution_idx(chr)].to_s }.reduce(:+)
-      binding.pry
+      #binding.pry
     end 
       # .inject(@result) { |chr| print dictionary[substitution_idx(chr)].to_s } }
-    binding.pry
+    #binding.pry
     @result
   end
 

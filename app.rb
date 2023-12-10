@@ -7,9 +7,9 @@ module App
   include CommandLineParams
 
   def self.perform
-    binding.pry
+    #binding.pry
     CommandLineParams.display_usage
-    binding.pry
+    #binding.pry
     CaeserChipher.new(CommandLineParams.params)
   end
 end

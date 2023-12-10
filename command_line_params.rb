@@ -32,7 +32,7 @@ module CommandLineParams
     @@input_file_path = ARGV[1] || INPUT_FILE_PATH 
     @@output_file_pathh = ARGV[2] || OUTPUT_FILE_PATH
     @@shift_n = ARGV[3].to_i.positive? ? ARGV[3].to_i : DEFAULT_SHIFT_N 
-    binding.pry
+    #binding.pry
   end 
 
   def self.encode 
