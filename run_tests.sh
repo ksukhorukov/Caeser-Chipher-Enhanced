@@ -3,8 +3,12 @@
 rm ./input*
 rm ./output*
 
-echo 'crypt0' > ./input1.txt 
-./app.rb encode ./input1.txt ./output1.txt 1
+# BASE CASE
+echo 'crypt0' > ./input.txt 
+./app.rb encode ./input.txt ./output.txt 1
+./app.rb decode ./output.txt ./input.txt 1
 
-# echo 'ZHN6cXUxCg==' > ./output1.txt 
-./app.rb decode ./output1.txt ./input1.txt 1
+# CUSTOM SHIFTING EQUALS 33
+echo 'crypt0' > ./input.txt 
+./app.rb encode ./input.txt ./output.txt 33
+./app.rb decode ./output.txt ./input.txt 33
