@@ -16,11 +16,11 @@ named after Julius Caesar, who used it in his private correspondence.
 ## Usage
 
 ```
- $ ./app.rb help
+$ ./app.rb
 
 ./app.rb encode|decpde ./input.txt ./output.txt 5
 
-The last param is shifting number, e.g. 25
+The last param is shifting number, e.g. 33
 ```
 
 
