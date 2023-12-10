@@ -14,7 +14,7 @@ class CaeserChipher
     @encode = params[:encode]
     @result = ''
 
-    # #binding.pry
+    # #
     # puts "encode: #{encode}, decode: #{decode}"
 
     perform
@@ -52,24 +52,34 @@ class CaeserChipher
 
   def transform
     @result = ''
-
+    
     unless encode
       buffer = []
+      
       read_input.map { |line| buffer << line }
+      
       @result = buffer.reduce(:+)
       @result = base64_decoded_result
-      fp_output.write("#{@result}\n")
-      fp_output.close
-      @fp_output = nil
-      #binding.pry
-      return @result
+
+      begin 
+        fp_input_for_write.write("#{@result}")
+      ensure 
+        fp_input_for_write.close
+        @fp_input_for_write = nil
+      end 
+
+      @result
     end 
+
+    
+    @result = ''
     read_input.each do |line| 
+      
       chars = line.chomp.split('')
       @result += chars.map { |chr| dictionary[substitution_idx(chr)].to_s }.reduce(:+)
     end 
+    
     @result += "\n"
-    @result = base64_encoded_result
   end
 
 
@@ -80,7 +90,11 @@ class CaeserChipher
   end
 
   def read_input
-    @input_context ||= File.readlines(input) 
+   File.readlines(input) 
+  end 
+
+  def fp_input_for_write
+    @fp_input_for_write ||= File.open(input, 'w')
   end 
 
   def fp_output
