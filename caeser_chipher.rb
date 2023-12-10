@@ -8,14 +8,12 @@ class CaeserChipher
   attr_accessor :result
               
   def initialize(params)
+
     @input = params[:input]
     @output = params[:output]
     @shift_n = params[:shift_n]
     @encode = params[:encode]
     @result = ''
-
-    # #
-    # puts "encode: #{encode}, decode: #{decode}"
 
     perform
     output_result
@@ -24,12 +22,11 @@ class CaeserChipher
   private 
 
   def base64_encoded_result 
-    @base64_encoded_result ||= Base64.encode64(@result)
+    Base64.encode64(@result)
   end
 
   def base64_decoded_result 
-    binding.pry
-    @base64_decoded_result ||= Base64.decode64(@result)
+    Base64.decode64(@result)
   end
 
   def substitution_idx(chr)
@@ -56,11 +53,11 @@ class CaeserChipher
     
     unless encode
       buffer = []
-      
-      read_input.map { |line| buffer << line }
-      
-      @result = buffer.reduce(:+)
 
+      read_input.map { |line| buffer << line }
+
+      @result = buffer.reduce(:+)
+ 
       begin 
         fp_input_for_write.puts("#{@result}")
       ensure 
@@ -71,38 +68,34 @@ class CaeserChipher
       @result
     end 
 
-    
-    @result = ''
+    @result = "".force_encoding('utf-8')
+
     read_input.each do |line| 
       line = line.force_encoding('utf-8')
       line.chomp!
-      
       @chars = line.split('')
+      @result = line
       reject_nils_in_chars
-      binding.pry
-      perform_substitution
-      @result += substituted_data.reject { |chr| chr == nil }.reduce(:+) unless substituted_data.nil?
+      @result = @chars.join('')
+      @result = base64_decoded_result unless encode
+      @result = perform_substitution.join('') 
+      return @result 
     end 
-    
-    @result += "\n"
-  end
+    @chars = result.split('')
+    @result = base64_encoded_result if encode
 
-  def perform
-    reject_nils_in_chars
-    perform_substitution
-    substituted_data
+    @result
   end
 
   def reject_nils_in_chars
-    return '' if substituted_data.nil?
-
-    @substituted_data = substituted_data.reject { |chr| chr == nil }
+    return '' if @result.nil?
+    @result = result.split('').reject { |chr| chr == nil }.join('')
+    @result = "#{result}\n"
   end
 
   def perform_substitution
-    return '' if @chars.nil?
-    
-    @substituted_data = @chars.map { |chr| ((dictionary[substitution_idx(chr)].to_s unless chr.nil? or chr.empty?) or '' ) }
+    return '' if @result.nil?
+    @substituted_data = result.split('').map { |chr| ((dictionary[substitution_idx(chr)].to_s unless chr.nil? or chr.empty?) or '' ) }
   end
 
   def check_params
@@ -125,9 +118,10 @@ class CaeserChipher
 
   def output_result
     begin 
-      base64_encoded_result if encode
-      transform_spaces unless encode
-      fp_output.write(@result)
+      
+      @result = base64_encoded_result if encode
+      @result = transform_spaces unless encode
+      fp_output.puts(@result)
       puts "\n#{@result}\n".colorize(:green)
     ensure 
       fp_output.close 
