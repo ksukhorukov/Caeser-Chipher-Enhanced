@@ -49,12 +49,12 @@ class CaeserChipher
   end 
 
   def transform
-    @result = ''
+    @result = "".force_encoding("utf-8")
     
     unless encode
       buffer = []
 
-      read_input.map { |line| buffer << line }
+      read_input.map { |line| buffer << line.force_encoding("utf-8") }
 
       @result = buffer.reduce(:+)
  
@@ -70,26 +70,24 @@ class CaeserChipher
 
     @result = "".force_encoding('utf-8')
 
-    read_input.each do |line| 
-      line = line.force_encoding('utf-8')
-      line.chomp!
-      @chars = line.split('')
-      @result = line
-      reject_nils_in_chars
-      @result = @chars.join('')
-      @result = base64_decoded_result unless encode
-      @result = perform_substitution.join('') 
-      return @result 
-    end 
-    @chars = result.split('')
-    @result = base64_encoded_result if encode
+    @result = read_input.map { |line| line = line.force_encoding('utf-8'); line.chomp!; line }.join("\n")
+    
+    reject_nils_in_result # refactor. reject nils from result.
+
+    @result = base64_decoded_result if encode == false
+    
+    @result.force_encoding("utf-8")
+    
+    @result = perform_substitution.join
+
+    @result = base64_encoded_result if encode == true
 
     @result
   end
 
-  def reject_nils_in_chars
-    return '' if @result.nil?
-    @result = result.split('').reject { |chr| chr == nil }.join('')
+  def reject_nils_in_result
+    return '' if result.nil?
+    @result = result.split("\n").map { |line| line.split('').reject { |chr| chr == nil }.join }.join("\n")
     @result = "#{result}\n"
   end
 
@@ -118,9 +116,7 @@ class CaeserChipher
 
   def output_result
     begin 
-      
-      @result = base64_encoded_result if encode
-      @result = transform_spaces unless encode
+      @result = transform_spaces if encode == false
       fp_output.puts(@result)
       puts "\n#{@result}\n".colorize(:green)
     ensure 
