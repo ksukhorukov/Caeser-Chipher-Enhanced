@@ -117,7 +117,7 @@ class CaeserChipher
   def output_result
     begin 
       @result = transform_spaces if encode == false
-      fp_output.puts(@result)
+      fp_output.puts(@result.strip)
       puts "\n#{@result}\n".colorize(:green)
     ensure 
       fp_output.close 

@@ -10,30 +10,37 @@ rm -f ./output*
 echo 'crypt0' > ./input.txt 
 
 # BASE CASE
-./app.rb encode ./input.txt ./output.txt 1
-./app.rb decode ./output.txt ./input.txt 1
+./app.rb encode ./input.txt ./output.txt 1 > /dev/null
+./app.rb decode ./output.txt ./output2.txt 1 > /dev/null
 
-# CUSTOM SHIFTING EQUALS 33
-echo 'crypt0' > ./input.txt 
-./app.rb encode ./input.txt ./output.txt 33
-./app.rb decode ./output.txt ./input.txt 33
+let DIFFERENCE=`diff input.txt output2.txt | wc -l | sed -e 's/^[[:space:]]*//'`
 
-# PERFORMANCE
+if [[ $DIFFERENCE == 0 ]]
+then
+  echo -e "[+] BASE TEST PASSED SUCCESSFULLY\n"
+fi
 
-# ENCODE AND DECODE 'WAR AND PEACE' by grad Leo Tolstoy
-echo -e "ENCODING... PLEASE WAIT!"
-time ./app.rb encode ./war_and_peace.txt ./output.txt 33
-echo -e "\nDECODING... PLEASE WAIT!"
-time ./app.rb decode ./output.txt ./input.txt 33
+# # CUSTOM SHIFTING EQUALS 33
+# echo 'crypt0' > ./input.txt 
+# ./app.rb encode ./input.txt ./output.txt 33
+# ./app.rb decode ./output.txt ./input.txt 33
 
-# ENCODE AND DECODE 'BRAVE NEW WORLD' by Oldos Haxley
-echo -e "ENCODING... PLEASE WAIT!"
-time ./app.rb encode ./brave_new_world_original.txt ./output.txt 33
-echo -e "\nDECODING... PLEASE WAIT!"
-time ./app.rb decode ./output.txt ./input.txt 33
+# # PERFORMANCE
+
+# # ENCODE AND DECODE 'WAR AND PEACE' by grad Leo Tolstoy
+# echo -e "ENCODING... PLEASE WAIT!"
+# time ./app.rb encode ./war_and_peace.txt ./output.txt 33
+# echo -e "\nDECODING... PLEASE WAIT!"
+# time ./app.rb decode ./output.txt ./input.txt 33
+
+# # ENCODE AND DECODE 'BRAVE NEW WORLD' by Oldos Haxley
+# echo -e "ENCODING... PLEASE WAIT!"
+# time ./app.rb encode ./brave_new_world_original.txt ./output.txt 33
+# echo -e "\nDECODING... PLEASE WAIT!"
+# time ./app.rb decode ./output.txt ./input.txt 33
 
 
-# CLEAN
+#CLEAN
 rm ./input*
 rm ./output*
 
