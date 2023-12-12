@@ -1,8 +1,17 @@
 require 'base64'
 require 'pry'
+require 'pp'
 
 class CaeserChipher
-  attr_reader :input, :output, :shift_n, 
+  DICTIONARY_ADDONS = [
+    "﻿", "\n", "[", "]", "“", "—", 
+    "‘", "”", "á", "é", "ë", "í", "À", "ó", 
+    "ú", "è", "î", "ô", "à", "ç",  "â", "ê", 
+    "ï", "ý", "ö", "ä", "ü", "Á", "œ", "É", "æ", "™", "•", 
+    "…", "«", "»", "́", "ё", "_"
+  ]
+  
+  attr_reader :input, :output, :shift_n, :addons,
               :input_text, :encode, :substituted_data
 
   attr_accessor :result
@@ -13,6 +22,7 @@ class CaeserChipher
     @output = params[:output]
     @shift_n = params[:shift_n]
     @encode = params[:encode]
+    @addons = []
     @result = ''
 
     perform
@@ -30,11 +40,11 @@ class CaeserChipher
   end
 
   def substitution_idx(chr)
-    # puts " substitution_idx. encode: #{encode}, decode: #{decode}"
     current_idx = dictionary.index(chr)
 
     if current_idx.nil? and !chr.nil?
       @dictionary << chr
+      @addons << chr
       return substitution_idx(chr)
     end
 
@@ -72,7 +82,7 @@ class CaeserChipher
 
     @result = read_input.map { |line| line = line.force_encoding('utf-8'); line.chomp!; line }.join("\n")
     
-    reject_nils_in_result # refactor. reject nils from result.
+    reject_nils_in_result
 
     @result = base64_decoded_result if encode == false
     
@@ -122,7 +132,15 @@ class CaeserChipher
     ensure 
       fp_output.close 
     end
+
+    # dictionary_addons
   end
+
+  def dictionary_addons
+    puts "\n\nDICTIONARY ADDONS\n".colorize(color: :red, mode: :bold)
+    pp addons
+    puts "\n\n"
+  end 
 
   def transform_spaces 
     @result.gsub!('.', ' ')
@@ -133,7 +151,7 @@ class CaeserChipher
   def dictionary
     @dictionary ||= (numbers + letters +  letters_capitalized + 
                      russian_letters +  russian_letters_capitalized + 
-                     symbols + ['’', ' ', '\n']).flatten
+                     symbols + ['’', ' ', '\n'] + DICTIONARY_ADDONS).flatten
   end
 
   def numbers
