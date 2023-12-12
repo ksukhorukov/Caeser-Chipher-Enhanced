@@ -30,9 +30,9 @@ The last param is shifting number, e.g. 33 or 5
 
 ```
 $ echo 'hi! this string will be chiphered' > input.txt  
-$ ./app.rb encode ./input.txt ./output.txt 10          
+$ ./app.rb encode ./input.txt ./output.txt 10
 
-cnMrOERyc0M4Q0RCc3hxOEdzdnY4bG84bXJzenJvQm9u
+cnMrw6FEcnNDw6FDREJzeHHDoUdzdnbDoWxvw6FtcnN6cm9Cb27DrQ==
 
 $ ./app.rb decode ./output.txt ./output2.txt 10 
 
