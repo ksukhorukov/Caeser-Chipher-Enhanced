@@ -47,38 +47,37 @@ hi! this string will be chiphered
 ## Tests
 
 ```
-$ time ./run_tests.sh
-
 [+] BASE TEST PASSED SUCCESSFULLY
 
 [+] SECOND TEST WITH CUSTOM SHIFTING PASSED SUCCESSFULLY
 
 [~] ENCODING "WAR AND PEACE"... PLEASE WAIT!
 
-real  0m6.676s
-user  0m6.523s
-sys 0m0.129s
+real  0m6.559s
+user  0m6.411s
+sys 0m0.127s
 
 [~] DECODING "WAR AND PEACE"... PLEASE WAIT!
 
-real  0m36.584s
-user  0m19.806s
-sys 0m16.685s
+real  0m36.353s
+user  0m19.646s
+sys 0m16.628s
+
 [~] ENCODING "BRAVE NEW WORLD"... PLEASE WAIT!
 
-real  0m0.130s
-user  0m0.109s
-sys 0m0.018s
+real  0m0.128s
+user  0m0.108s
+sys 0m0.017s
 
 [~] DECODING "BRAVE NEW WORLD"... PLEASE WAIT!
 
-real  0m0.143s
-user  0m0.122s
-sys 0m0.018s
+real  0m0.140s
+user  0m0.120s
+sys 0m0.017s
 
 [+] ALL TESTS PASSED
 
-./run_tests.sh  26.82s user 16.94s system 99% cpu 43.907 total
+./run_tests.sh  26.55s user 16.88s system 99% cpu 43.549 total
 ```
 
 

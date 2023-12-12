@@ -47,7 +47,7 @@ echo -e "\n[~] DECODING \"WAR AND PEACE\"... PLEASE WAIT!"
 time ./app.rb decode ./output.txt ./input.txt 33 > /dev/null
 
 # ENCODE AND DECODE 'BRAVE NEW WORLD' by Oldos Haxley
-echo -e "[~] ENCODING \"BRAVE NEW WORLD\"... PLEASE WAIT!"
+echo -e "\n[~] ENCODING \"BRAVE NEW WORLD\"... PLEASE WAIT!"
 time ./app.rb encode ./brave_new_world_original.txt ./output.txt 33 > /dev/null
 echo -e "\n[~] DECODING \"BRAVE NEW WORLD\"... PLEASE WAIT!"
 time ./app.rb decode ./output.txt ./input.txt 33 > /dev/null
