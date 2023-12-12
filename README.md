@@ -15,6 +15,10 @@ named after Julius Caesar, who used it in his private correspondence.
 ```
 ***
 
+## Requirements
+
+* Ruby 3.2.2 or higher
+
 ## Usage
 
 ```
