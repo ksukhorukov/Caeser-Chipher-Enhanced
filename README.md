@@ -18,11 +18,11 @@ named after Julius Caesar, who used it in his private correspondence.
 ## Enhancements
 
 Extended dictionary that includes special symbols and rare UTF-8 symbols extracted from big corpuses,
-plus BASE64 application of BASE64 encoding algorithm for encrypted results. 
+plus application of BASE64 encoding algorithm for encrypted results. 
 
-The last modification helps to verify and prevent tampering including "tempering on the fly" since BASE64 algorithm implies realization of check sums mechanisms. 
+The last modification helps to verify and prevent tampering including "tempering on the fly attack" since BASE64 algorithm implies realization of check sums mechanisms. 
 
-Also the second level of encoding provides the additional level of obfuscation.
+Also the second level of encoding provides second level of obfuscation.
 
 ## Requirements
 
