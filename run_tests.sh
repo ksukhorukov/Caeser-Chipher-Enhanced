@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+GREEN=$(tput setaf 2)
+RED=$(tput setaf 1)
+BLUE=$(tput setaf 4)
+NC=$(tput sgr0)
+
 clear
 
 # CLEAN
@@ -17,9 +22,9 @@ let DIFFERENCE=`diff input.txt output2.txt | wc -l | sed -e 's/^[[:space:]]*//'`
 
 if [[ $DIFFERENCE == 0 ]]
 then
-  echo -e "[+] BASE TEST PASSED SUCCESSFULLY\n"
+  echo -e "${GREEN}[+] BASE TEST PASSED SUCCESSFULLY\n"
 else
-  echo "[-] BASE TEST FAILED!\n"
+  echo "${RED}[-] BASE TEST FAILED!\n"
   exit
 fi
 
@@ -32,27 +37,27 @@ DIFFERENCE=`diff input.txt output2.txt | wc -l | sed -e 's/^[[:space:]]*//'`
 
 if [[ $DIFFERENCE == 0 ]]
 then
-  echo -e "[+] SECOND TEST WITH CUSTOM SHIFTING PASSED SUCCESSFULLY\n"
+  echo -e "${GREEN}[+] SECOND TEST WITH CUSTOM SHIFTING PASSED SUCCESSFULLY\n"
 else
-  echo "[-] SECOND TEST FAILED!"
+  echo "${RED}[-] SECOND TEST FAILED!"
   exit 
 fi
 
 # PERFORMANCE
 
 # ENCODE AND DECODE 'WAR AND PEACE' by grad Leo Tolstoy
-echo -e "[~] ENCODING \"WAR AND PEACE\"... PLEASE WAIT!"
+echo -e "${BLUE}[~] ENCODING \"WAR AND PEACE\"... PLEASE WAIT!"
 time ./app.rb encode ./war_and_peace.txt ./output.txt 33 > /dev/null
-echo -e "\n[~] DECODING \"WAR AND PEACE\"... PLEASE WAIT!"
+echo -e "${BLUE}\n[~] DECODING \"WAR AND PEACE\"... PLEASE WAIT!"
 time ./app.rb decode ./output.txt ./input.txt 33 > /dev/null
 
 # ENCODE AND DECODE 'BRAVE NEW WORLD' by Oldos Haxley
-echo -e "\n[~] ENCODING \"BRAVE NEW WORLD\"... PLEASE WAIT!"
+echo -e "${BLUE}\n[~] ENCODING \"BRAVE NEW WORLD\"... PLEASE WAIT!"
 time ./app.rb encode ./brave_new_world_original.txt ./output.txt 33 > /dev/null
-echo -e "\n[~] DECODING \"BRAVE NEW WORLD\"... PLEASE WAIT!"
+echo -e "${BLUE}\n[~] DECODING \"BRAVE NEW WORLD\"... PLEASE WAIT!"
 time ./app.rb decode ./output.txt ./input.txt 33 > /dev/null
 
-echo -e "\n[+] ALL TESTS PASSED\n"
+echo -e "${GREEN}\n[+] ALL TESTS PASSED SUCCESSFULLY\n"
 
 # CLEAN
 rm -f  ./in*

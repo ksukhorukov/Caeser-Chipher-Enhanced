@@ -145,10 +145,12 @@ class CaeserChipher
   end
 
   def add_third_level_obfuscation
+    # perform_substitution.join.force_encoding("utf-8")
     perform_substitution.join
   end
 
   def remove_third_level_obfuscation
+    # perform_substitution.join.force_encoding("utf-8")
     perform_substitution.join
   end
 
