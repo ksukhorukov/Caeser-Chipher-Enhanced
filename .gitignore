@@ -1,6 +1,1 @@
-./in*
-./out*
-./van_gogh_and_bro_theo_original.txt 
-./input.txt
-./output.txt
-./output2.txt
+*.txt
