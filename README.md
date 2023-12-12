@@ -1,6 +1,6 @@
 # Caeser Chipher Enhanced
 
-## Caesar Text Chipher
+## Caesar Text Chipher Description
 
 Description from [Wiki](https://en.wikipedia.org/wiki/Caesar_cipher)
 
