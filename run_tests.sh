@@ -41,16 +41,16 @@ fi
 # PERFORMANCE
 
 # ENCODE AND DECODE 'WAR AND PEACE' by grad Leo Tolstoy
-echo -e "ENCODING \"WAR AND PEACE\"... PLEASE WAIT!"
-time ./app.rb encode ./war_and_peace.txt ./output.txt 33
-echo -e "\nDECODING \"WAR AND PEACE\"... PLEASE WAIT!"
-time ./app.rb decode ./output.txt ./input.txt 33
+echo -e "[~] ENCODING \"WAR AND PEACE\"... PLEASE WAIT!"
+time ./app.rb encode ./war_and_peace.txt ./output.txt 33 > /dev/null
+echo -e "\n[~] DECODING \"WAR AND PEACE\"... PLEASE WAIT!"
+time ./app.rb decode ./output.txt ./input.txt 33 > /dev/null
 
 # ENCODE AND DECODE 'BRAVE NEW WORLD' by Oldos Haxley
-echo -e "ENCODING \"BRAVE NEW WORLD\"... PLEASE WAIT!"
-time ./app.rb encode ./brave_new_world_original.txt ./output.txt 33
-echo -e "\nDECODING \"BRAVE NEW WORLD\"... PLEASE WAIT!"
-time ./app.rb decode ./output.txt ./input.txt 33
+echo -e "[~] ENCODING \"BRAVE NEW WORLD\"... PLEASE WAIT!"
+time ./app.rb encode ./brave_new_world_original.txt ./output.txt 33 > /dev/null
+echo -e "\n[~] DECODING \"BRAVE NEW WORLD\"... PLEASE WAIT!"
+time ./app.rb decode ./output.txt ./input.txt 33 > /dev/null
 
 echo -e "\n[+] ALL TESTS PASSED\n"
 

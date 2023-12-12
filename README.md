@@ -51,9 +51,34 @@ $ time ./run_tests.sh
 
 [+] BASE TEST PASSED SUCCESSFULLY
 
+[+] SECOND TEST WITH CUSTOM SHIFTING PASSED SUCCESSFULLY
+
+[~] ENCODING "WAR AND PEACE"... PLEASE WAIT!
+
+real  0m6.676s
+user  0m6.523s
+sys 0m0.129s
+
+[~] DECODING "WAR AND PEACE"... PLEASE WAIT!
+
+real  0m36.584s
+user  0m19.806s
+sys 0m16.685s
+[~] ENCODING "BRAVE NEW WORLD"... PLEASE WAIT!
+
+real  0m0.130s
+user  0m0.109s
+sys 0m0.018s
+
+[~] DECODING "BRAVE NEW WORLD"... PLEASE WAIT!
+
+real  0m0.143s
+user  0m0.122s
+sys 0m0.018s
+
 [+] ALL TESTS PASSED
 
-./run_tests.sh  0.14s user 0.05s system 94% cpu 0.211 total
+./run_tests.sh  26.82s user 16.94s system 99% cpu 43.907 total
 ```
 
 
