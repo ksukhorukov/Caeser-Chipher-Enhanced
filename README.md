@@ -15,6 +15,15 @@ named after Julius Caesar, who used it in his private correspondence.
 ```
 ***
 
+## Enhancements
+
+Extended dictionary that includes special symbols and rare UTF-8 symbols extracted from big corpuses,
+plus BASE64 application of BASE64 encoding algorithm for encrypted results. 
+
+The last modification helps to verify and prevent tampering including "tempering on the fly" since BASE64 algorithm implies realization of check sums mechanisms. 
+
+Also the second level of encoding provides the additional level of obfuscation.
+
 ## Requirements
 
 * Ruby 3.2.2 or higher
