@@ -12,7 +12,7 @@ class CaeserChipher
   ]
   
   attr_reader :input, :output, :shift_n, :addons,
-              :input_text, :encode, :substituted_data
+              :input_text, :encode
 
   attr_accessor :result
               
@@ -68,6 +68,8 @@ class CaeserChipher
 
       @result = buffer.reduce(:+)
  
+      @result = remove_third_level_obfuscation
+
       begin 
         fp_input_for_write.puts("#{@result}")
       ensure 
@@ -92,6 +94,8 @@ class CaeserChipher
 
     @result = base64_encoded_result if encode == true
 
+    @result = add_third_level_obfuscation if encode == true
+
     @result
   end
 
@@ -103,6 +107,10 @@ class CaeserChipher
 
   def perform_substitution
     return '' if @result.nil?
+    substituted_data
+  end
+
+  def substituted_data
     @substituted_data = result.split('').map { |chr| ((dictionary[substitution_idx(chr)].to_s unless chr.nil? or chr.empty?) or '' ) }
   end
 
@@ -134,6 +142,14 @@ class CaeserChipher
     end
 
     # dictionary_addons
+  end
+
+  def add_third_level_obfuscation
+    perform_substitution.join
+  end
+
+  def remove_third_level_obfuscation
+    perform_substitution.join
   end
 
   def dictionary_addons
