@@ -10,6 +10,7 @@ clear
 # CLEAN
 rm -f  ./in*
 rm -f ./out*
+rm -f ./wp*
 
 # # INIT DATA
 echo 'crypt0' > ./input.txt 
@@ -47,9 +48,10 @@ fi
 
 # ENCODE AND DECODE 'WAR AND PEACE' by grad Leo Tolstoy
 echo -e "${BLUE}[~] ENCODING \"WAR AND PEACE\"... PLEASE WAIT!"
-time ./app.rb encode ./war_and_peace.txt ./output.txt 33 > /dev/null
+time ./app.rb encode ./war_and_peace.txt ./wp_encrypted.txt 33 > /dev/null
 echo -e "${BLUE}\n[~] DECODING \"WAR AND PEACE\"... PLEASE WAIT!"
-time ./app.rb decode ./output.txt ./input.txt 33 > /dev/null
+time ./app.rb decode ./wp_encrypted.txt ./wp_decrypted.txt 33 > /dev/null
+
 
 # ENCODE AND DECODE 'BRAVE NEW WORLD' by Oldos Haxley
 echo -e "${BLUE}\n[~] ENCODING \"BRAVE NEW WORLD\"... PLEASE WAIT!"
@@ -62,4 +64,5 @@ echo -e "${GREEN}\n[+] ALL TESTS PASSED SUCCESSFULLY\n"
 # CLEAN
 rm -f  ./in*
 rm -f ./out*
+rm -f ./wp*
 

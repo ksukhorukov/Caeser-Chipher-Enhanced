@@ -67,8 +67,14 @@ class CaeserChipher
       read_input.map { |line| buffer << line.force_encoding("utf-8") }
 
       @result = buffer.reduce(:+)
- 
-      @result = remove_third_level_obfuscation
+
+      @result.force_encoding("utf-8")
+
+      @result = base64_decoded_result
+
+      @result.force_encoding("utf-8")
+
+      @result = perform_substitution
 
       begin 
         fp_input_for_write.puts("#{@result}")
@@ -77,26 +83,19 @@ class CaeserChipher
         @fp_input_for_write = nil
       end 
 
-      @result
+      return result
     end 
-
     @result = "".force_encoding('utf-8')
 
     @result = read_input.map { |line| line = line.force_encoding('utf-8'); line.chomp!; line }.join("\n")
-    
+
     reject_nils_in_result
 
-    @result = base64_decoded_result if encode == false
-    
     @result.force_encoding("utf-8")
-    
-    @result = perform_substitution.join
 
-    @result = base64_encoded_result if encode == true
+    @result = perform_substitution
 
-    @result = add_third_level_obfuscation if encode == true
-
-    @result
+    @result = base64_encoded_result
   end
 
   def reject_nils_in_result
@@ -107,7 +106,7 @@ class CaeserChipher
 
   def perform_substitution
     return '' if @result.nil?
-    substituted_data
+    substituted_data.join
   end
 
   def substituted_data
@@ -135,23 +134,14 @@ class CaeserChipher
   def output_result
     begin 
       @result = transform_spaces if encode == false
-      fp_output.puts(@result.strip)
+      @result.strip!
+      fp_output.puts(@result)
       puts "\n#{@result}\n".colorize(:green)
     ensure 
       fp_output.close 
     end
 
     # dictionary_addons
-  end
-
-  def add_third_level_obfuscation
-    # perform_substitution.join.force_encoding("utf-8")
-    perform_substitution.join
-  end
-
-  def remove_third_level_obfuscation
-    # perform_substitution.join.force_encoding("utf-8")
-    perform_substitution.join
   end
 
   def dictionary_addons
