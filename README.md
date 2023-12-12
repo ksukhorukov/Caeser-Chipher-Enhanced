@@ -42,30 +42,18 @@ $ ./app.rb decode ./output.txt ./output2.txt 10
 
 hi! this string will be chiphered
 
-
 ```
 
 ## Tests
 
 ```
-$ time ./run_tests.sh > /dev/null
+$ time ./run_tests.sh
 
-real  0m0.096s
-user  0m0.075s
-sys 0m0.018s
+[+] BASE TEST PASSED SUCCESSFULLY
 
-real  0m0.079s
-user  0m0.060s
-sys 0m0.016s
+[+] ALL TESTS PASSED
 
-real  0m0.078s
-user  0m0.059s
-sys 0m0.015s
-
-real  0m0.078s
-user  0m0.059s
-sys 0m0.016s
-./run_tests.sh > /dev/null  0.51s user 0.15s system 95% cpu 0.695 total
+./run_tests.sh  0.14s user 0.05s system 94% cpu 0.211 total
 ```
 
 
